@@ -8,7 +8,7 @@ module.exports = {
       user:     config.user,
       password: config.password,
       host:     config.host
-    }
+    }, 
   },
   test: {
     client: 'mysql2',
