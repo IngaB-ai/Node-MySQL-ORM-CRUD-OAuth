@@ -1,27 +1,27 @@
 const request = require('supertest')
 const express = require('express')
 
-jest.mock('../src/services/linkService', () => ({
+jest.mock('/src/services/linkService', () => ({
   normalizeUrl: jest.fn(),
   extractTags: jest.fn()
 }))
 
 
-jest.mock('../src/databasePersistence/models/Link', () => ({
+jest.mock('/src/databasePersistence/models/Link', () => ({
   query: jest.fn()
 }))
 
-const Link = require('../src/databasePersistence/models/Link')
-const { normalizeUrl, extractTags } = require('../src/services/linkService')
+const Link = require('/src/databasePersistence/models/Link')
+const { normalizeUrl, extractTags } = require('/src/services/linkService')
 
 
-const linksRouter = require('../src/routes/linksRoutes')
+const linksRouter = require('../../src/routes/linksRoutes')
 
 // Minimal app setup mirroring app.js
 const setupApp = () => {
   const app = express()
   app.use(express.json())
-  require('../src/routes/linksRoutes')(app)
+  require('/src/routes/linksRoutes')(app)
   app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).json({ error: err.message })
 })

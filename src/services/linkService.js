@@ -2,13 +2,13 @@
 
 function normalizeUrl(value) {
   if (typeof value !== 'string') {
-    throw new Error('Invalid URL structure', { cause: 'ValidationError' })
+    throw new Error('Invalid URL type, should be a string', { cause: 'ValidationError' })
   }
 
   const trimmed = value.trim()
 
   if (trimmed.length === 0) {
-    throw new Error('Invalid URL structure', { cause: 'ValidationError' })
+    throw new Error('Invalid URL structure, empty URL', { cause: 'ValidationError' })
   }
 
   const withProtocol = trimmed.includes('://')
@@ -18,7 +18,7 @@ function normalizeUrl(value) {
   try {
     return new URL(withProtocol).href
   } catch {
-    throw new Error('Invalid URL structure', { cause: 'ValidationError' })
+    throw new Error('Invalid URL structure, not a valid URL', { cause: 'ValidationError' })
   }
 }
 

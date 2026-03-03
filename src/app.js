@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+require('./databasePersistence/db')
 // var cors = require('cors')
 
 var allowCrossDomain = function (req, res, next) {
@@ -20,18 +21,11 @@ app.use(
   })
 )
 
-// DB & ORM
-const knexConfig = require('./databasePersistence/knexfile')
-const Knex = require('knex')
-const { Model } = require('objection')
-const knex = Knex(knexConfig.development)
-Model.knex(knex)
-
 require('./routes/linksRoutes')(app)
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.log('err: ', err)
+  console.log('server err: ', err)
 
   if (err) {
     res.status(err.statusCode || 500).json({

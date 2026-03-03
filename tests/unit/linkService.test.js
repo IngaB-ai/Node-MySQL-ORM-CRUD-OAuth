@@ -1,4 +1,4 @@
-const { normalizeUrl, extractTags } = require('../src/services/linkService')
+const { normalizeUrl, extractTags } = require('../../src/services/linkService')
 
 describe('normalizeUrl', () => {
   it('returns value unchanged if it already has a protocol', () => {
@@ -14,13 +14,13 @@ describe('normalizeUrl', () => {
   })
 
   it('throws err on invalid URL structure', () => {
-    expect(() => normalizeUrl('not a url!!')).toThrow('Invalid URL structure')
+    expect(() => normalizeUrl('not a url!!')).toThrow('Invalid URL structure, not a valid URL')
   })
 
   it('throws err on null, empty string, and non-string input', () => {
-    expect(() => normalizeUrl(null)).toThrow('Invalid URL structure')
-    expect(() => normalizeUrl('')).toThrow('Invalid URL structure')
-    expect(() => normalizeUrl(444)).toThrow('Invalid URL structure')
+    expect(() => normalizeUrl(null)).toThrow('Invalid URL type, should be a string')
+    expect(() => normalizeUrl('')).toThrow('Invalid URL structure, empty URL')
+    expect(() => normalizeUrl(444)).toThrow('Invalid URL type, should be a string')
   })
   })
 
