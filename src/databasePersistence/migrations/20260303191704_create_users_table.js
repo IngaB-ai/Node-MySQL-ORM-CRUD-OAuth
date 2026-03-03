@@ -1,10 +1,11 @@
 exports.up = function (knex, Promise) {
   const schema = knex.schema.createTable('users', function (table) {
     table.increments('id').primary()
-    table.string('email', 255).notNullable().unique()
+    table.string('email', 50).notNullable().unique()
     table.string('password', 255).nullable()
-    table.string('google_id', 255).nullable().unique()
-    table.string('username', 255).nullable().unique()
+    table.string('salt', 255).nullable()
+    table.string('google_id', 50).nullable().unique()
+    table.string('username', 50).nullable().unique()
     table.string('avatar', 255).nullable()
     table.boolean('is_admin').defaultTo(false)
     table.boolean('is_private').defaultTo(false)
